@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD\ HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>pest charts</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="../amcharts/amcharts.js" type="text/javascript"></script>
+        <script src="../amcharts/serial.js" type="text/javascript"></script>
+
+        <script>
+            var chart;
+
+            var chartData = [
+                {
+                    "pests": "Whorl Maggot",
+                    "volume": 4025,
+                    "color": "#00FF00"
+                },
+                {
+                    "pests": "Thrips",
+                    "volume": 1882,
+                    "color": "#00F800"
+                },
+                {
+                    "pests": "Stem borers",
+                    "volume": 1809,
+                    "color": "#00F000"
+                },
+                {
+                    "pests": "Brown Plant Hopper",
+                    "volume": 1322,
+                    "color": "#00E800"
+                },
+                {
+                    "pests": "Whitebacked Plant Hopper",
+                    "volume": 1122,
+                    "color": "#00E000"
+                },
+                {
+                    "pests": "Rice Delphacid",
+                    "volume": 1114,
+                    "color": "#00D800"
+                },
+                {
+                    "pests": "Green Leaf Hopper",
+                    "volume": 984,
+                    "color": "#00D000"
+                },
+                {
+                    "pests": "Zigzag Leaf Hopper",
+                    "volume": 711,
+                    "color": "#00C800"
+                },
+                {
+                    "pests": "Leaf Folder",
+                    "volume": 665,
+                    "color": "#00C000"
+                },
+                {
+                    "pests": "Caseworm",
+                    "volume": 580,
+                    "color": "#00B800"
+                },
+                {
+                    "pests": "Rice Bug",
+                    "volume": 443,
+                    "color": "#00B000"
+                },
+                {
+                    "pests": "Armyworm",
+                    "volume": 441,
+                    "color": "#00A800"
+                },
+                {
+                    "pests": "Cutworm",
+                    "volume": 395,
+                    "color": "#00A000"
+                },
+                {
+                    "pests": "Greenhorned Caterpillar",
+                    "volume": 386,
+                    "color": "#009800"
+                },
+                {
+                    "pests": "Green Semilooper",
+                    "volume": 384,
+                    "color": "#009000"
+                },
+                {
+                    "pests": "Rice Skipper",
+                    "volume": 338,
+                    "color": "#008800"
+                },
+                {
+                    "pests": "Crickets",
+                    "volume": 328,
+                    "color": "#008000"
+                },
+				   {
+                    "pests": "Grasshopper",
+                    "volume": 4025,
+                    "color": "#007800"
+                },
+                {
+                    "pests": "Ants",
+                    "volume": 1882,
+                    "color": "#007000"
+                },
+                {
+                    "pests": "Mealybugs",
+                    "volume": 1809,
+                    "color": "#006800"
+                },
+                {
+                    "pests": "Hispa",
+                    "volume": 1322,
+                    "color": "#006000"
+                },
+                {
+                    "pests": "Leptista",
+                    "volume": 1122,
+                    "color": "#005800"
+                },
+                {
+                    "pests": "Mole Crickets",
+                    "volume": 1114,
+                    "color": "#005000"
+                },
+                {
+                    "pests": "Black Bug",
+                    "volume": 984,
+                    "color": "#004800"
+                },
+                {
+                    "pests": "Rats",
+                    "volume": 711,
+                    "color": "#004000"
+                },
+                {
+                    "pests": "Birds",
+                    "volume": 665,
+                    "color": "#003800"
+                }
+            ];
+
+
+            AmCharts.ready(function () {
+                // SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+                chart.dataProvider = chartData;
+                chart.categoryField = "pests";
+                // the following two lines makes chart 3D
+                chart.depth3D = 20;
+                chart.angle = 30;
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.labelRotation = 90;
+                categoryAxis.dashLength = 5;
+                categoryAxis.gridPosition = "start";
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.title = "Volume";
+                valueAxis.dashLength = 5;
+                chart.addValueAxis(valueAxis);
+
+                // GRAPH
+                var graph = new AmCharts.AmGraph();
+                graph.valueField = "volume";
+                graph.colorField = "color";
+                graph.balloonText = "<span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>";
+                graph.type = "column";
+                graph.lineAlpha = 0;
+                graph.fillAlphas = 1;
+                chart.addGraph(graph);
+
+                // CURSOR
+                var chartCursor = new AmCharts.ChartCursor();
+                chartCursor.cursorAlpha = 0;
+                chartCursor.zoomable = false;
+                chartCursor.categoryBalloonEnabled = false;
+                chart.addChartCursor(chartCursor);
+
+                chart.creditsPosition = "top-right";
+
+
+                // WRITE
+                chart.write("chartdiv");
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+    </body>
+
+</html>
